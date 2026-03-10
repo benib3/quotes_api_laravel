@@ -28,11 +28,11 @@ class UsersPaidDatesSeeder extends Seeder
         $this->addMonthsPaid($balsaUser, $balsaEndDate);
 
         $ivanUser = \App\Models\User::where('email', 'ivan.sibinovic@example.com')->first();
-        $ivanEndDate = \Carbon\Carbon::create(2026, 3, 1);
+        $ivanEndDate = \Carbon\Carbon::create(2027, 2, 1);
         $this->addMonthsPaid($ivanUser, $ivanEndDate);
 
         $nikolaUser = \App\Models\User::where('email', 'nikola.junkovic@example.com')->first();
-        $nikolaEndDate = \Carbon\Carbon::create(2025, 10, 1);
+        $nikolaEndDate = \Carbon\Carbon::create(2026, 5, 1);
         $this->addMonthsPaid($nikolaUser, $nikolaEndDate);
 
         $andrijaUser = \App\Models\User::where('email', 'andrija.vulicevic@example.com')->first();
