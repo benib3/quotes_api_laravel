@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('spotify_current_plan', function (Blueprint $table) {
+        Schema::create('spotify_current_plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->float('amount')->unique();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spotify_current_plan');
+        Schema::dropIfExists('spotify_current_plans');
     }
 };
