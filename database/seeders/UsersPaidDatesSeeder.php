@@ -3,12 +3,14 @@
 namespace Database\Seeders;
 
 use App\Services\SpotifyPlanCalculationService;
+use App\Services\UserRankService;
 use Illuminate\Database\Seeder;
 
 class UsersPaidDatesSeeder extends Seeder
 {
     public function __construct(
-        private SpotifyPlanCalculationService $spotifyPlanCalculationService
+        private SpotifyPlanCalculationService $spotifyPlanCalculationService,
+        private UserRankService $userRankService
     ) {}
     /**
      * Run the database seeds.
@@ -48,6 +50,9 @@ class UsersPaidDatesSeeder extends Seeder
                 'total_cost' => $totalCost,
             ]);
         }
+
+        // Update user ranks after seeding paid dates
+        $this->userRankService->updateUserRanks();
     }
 
     private function addMonthsPaid($user, $endDate)
