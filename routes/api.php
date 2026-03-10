@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::prefix('v1')->group(function () {
-    Route::get('/leaderboard', [\App\Http\Controllers\UserController::class, 'getLeaderBoard']);
-    Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'index']);
+    Route::get('/leaderboard', [\App\Http\Controllers\UserController::class, 'getLeaderBoard'])->middleware('throttle:30,1'); // Limit to 30 requests per minute
+    Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'index'])->middleware('throttle:30,1'); // Limit to 30 requests per minute
 
     Route::middleware('secure')->prefix('users')->group(function () {
         Route::get('/', [\App\Http\Controllers\UserController::class, 'index']);
