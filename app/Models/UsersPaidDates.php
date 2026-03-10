@@ -9,14 +9,21 @@ class UsersPaidDates extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'user_id'
+    ];
+
     protected $fillable = [
         'user_id',
         'paid_date',
         'amount',
     ];
 
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)
+            ->withoutMe()
+            ->select('id', 'name');
     }
 }

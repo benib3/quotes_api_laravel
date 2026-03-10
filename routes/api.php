@@ -18,11 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->group(function (){
-    Route::get('quotes',function (){
-        return response()->json([
-            'quote' => 'Education is the most powerful weapon which you can use to change the world.',
-            'author' => 'Nelson Mandela'
-        ]);
+Route::prefix('v1')->group(function () {
+    Route::get('/leaderboard', [\App\Http\Controllers\UserController::class, 'getLeaderBoard']);
+    Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'index']);
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', [\App\Http\Controllers\UserController::class, 'index']);
+        Route::post('/', [\App\Http\Controllers\UserController::class, 'store']);
+        Route::get('/{id}', [\App\Http\Controllers\UserController::class, 'show']);
+        Route::put('/{id}', [\App\Http\Controllers\UserController::class, 'update']);
     });
 });

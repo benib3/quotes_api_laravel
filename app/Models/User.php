@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UsersPaidDates::class);
     }
+
+    public function scopeWithoutMe($query, $email = 'benamin.bambur@example.com')
+    {
+        return $query->where('email', '!=', $email);
+    }
 }

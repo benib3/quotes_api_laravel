@@ -50,4 +50,5 @@ class SpotifyPlanCalculationService
     {
         return \App\Models\UsersPaidDates::where('user_id', $userId)->count();
     }
+
 }
