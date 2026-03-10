@@ -14,15 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::prefix('v1')->group(function () {
     Route::get('/leaderboard', [\App\Http\Controllers\UserController::class, 'getLeaderBoard']);
     Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'index']);
 
-    Route::prefix('users')->group(function () {
+    Route::middleware('secure')->prefix('users')->group(function () {
         Route::get('/', [\App\Http\Controllers\UserController::class, 'index']);
         Route::post('/', [\App\Http\Controllers\UserController::class, 'store']);
         Route::get('/{id}', [\App\Http\Controllers\UserController::class, 'show']);
