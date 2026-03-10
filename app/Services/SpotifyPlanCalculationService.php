@@ -32,4 +32,22 @@ class SpotifyPlanCalculationService
 
         return round($latestPlan->amount / $usersRegisteredCount, 2);
     }
+
+
+    public function calculateTotalCostForUser($userId)
+    {
+        $paidDates = \App\Models\UsersPaidDates::where('user_id', $userId)->get();
+        $totalCost = 0;
+
+        foreach ($paidDates as $paidDate) {
+            $totalCost += $paidDate->amount;
+        }
+
+        return round($totalCost, 2);
+    }
+
+    public function calculateTotalMonthsPaidForUser($userId)
+    {
+        return \App\Models\UsersPaidDates::where('user_id', $userId)->count();
+    }
 }
