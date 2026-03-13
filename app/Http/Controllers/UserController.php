@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\SpotifyPlanCalculationService;
 use App\Services\UserRankService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -90,7 +91,8 @@ class UserController extends Controller
         // create new paid date for user
         for ($i = 0; $i < $totalMonthsToBePaid; $i++) {
             try {
-                $dateToPay = $latestPaidDate ? $latestPaidDate->paid_date->addMonths($i + 1) : now()->addMonths($i + 1);
+                $paidDate = Carbon::parse($latestPaidDate ? $latestPaidDate->paid_date : now())->addMonths($i + 1);
+                $dateToPay = $paidDate->toDateString();
                 $user->paidDates()->create([
                     'paid_date' => $dateToPay,
                     'amount' => $perPersonAmount,
