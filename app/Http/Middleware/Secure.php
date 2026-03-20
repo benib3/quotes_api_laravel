@@ -17,10 +17,6 @@ class Secure
     public function handle(Request $request, Closure $next)
     {
         $authorizationHeader = $request->header('Authorization');
-        if (!$authorizationHeader || !str_starts_with($authorizationHeader, 'Bearer ')) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
         if ($authorizationHeader !== 'Bearer ' . env('SECRET_KEY')) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
